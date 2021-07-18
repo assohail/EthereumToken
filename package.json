@@ -1,0 +1,27 @@
+{
+  "name": "amz-token",
+  "version": "1.0.0",
+  "description": "amz-token-ico",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/assohail/EthereumToken.git"
+  },
+  "author": "Aamir Sohail",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/assohail/EthereumToken/issues"
+  },
+  "homepage": "https://github.com/assohail/EthereumToken#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "lite-server": "^2.6.1",
+    "truffle-hdwallet-provider": "^1.0.17"
+  }
+}

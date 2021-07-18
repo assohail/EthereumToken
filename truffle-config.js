@@ -1,5 +1,5 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
-const mnemonic = "album exile radio remove blanket change inside public rookie enjoy reveal priority";
+
 require('dotenv').config(); // dotenv will start env specific var's from the env file to process.env
 // heroku git:remote -a amz-ico-token
 module.exports = {
@@ -26,9 +26,15 @@ module.exports = {
     //  network_id: "*",       // Any network (default: none)
     // },
     rinkeby: {
+      // InfuraP1
       // provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/d11ebfb0fcd44dac8c671f139b7de6f1"),
-      provider: () => new HDWalletProvider(mnemonic, "https://rinkeby.infura.io/v3/1b69f3edcc6240d4959aedbb6ee49ed4"),
+      // InfuraP2
+      // provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/1b69f3edcc6240d4959aedbb6ee49ed4"),
+      // InfuraP3
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/e250bfdfbc8243219c45cbfe051ec367"),
       network_id: 4,     
+
+      
     },
   }
 };

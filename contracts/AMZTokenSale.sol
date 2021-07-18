@@ -24,7 +24,7 @@ contract AMZTokenSale {
 
     function buyTokens(uint256 _numberOfTokens) public payable {
         // Require that the value is equal to tokens
-        // require(msg.value == multiply(_numberOfTokens, tokenPrice), 'Value Error');
+        require(msg.value == multiply(_numberOfTokens, tokenPrice), 'Value Error');
         // Require that the contarct has enough tokens
         // require(tokenContract.balanceOf(address(this)) >= _numberOfTokens, 'Balance Error 1');
         // Require that a transfer is successful

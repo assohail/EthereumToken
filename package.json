@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "amz-token-ico",
   "main": "truffle.js",
+  "engines": {
+    "node": "14.x"
+  },
   "directories": {
     "test": "test"
   },

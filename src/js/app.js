@@ -50,6 +50,7 @@ App = {
   buyTokens: function() {
     // console.log('AAAAA');
     $('#content').hide();
+    $('.content').hide();
     $('#loader').show();
     var numberOfTokens = $('#numberOfTokens').val();
     console.log('No of Tokens: ' + numberOfTokens);
@@ -92,9 +93,11 @@ App = {
 
     var loader = $('#loader');
     var content = $('#content');
+    var content_footer = $('.content')
 
     loader.show();
     content.hide();
+    content_footer.hide();
 
     // Load account data
     web3.eth.getCoinbase(function(err, account){
@@ -131,6 +134,7 @@ App = {
         // App.loading = false;
         loader.hide();
         content.show();
+        content_footer.show();
         
       })
     });

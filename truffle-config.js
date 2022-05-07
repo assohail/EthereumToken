@@ -20,18 +20,18 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    // development: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 7545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
-    // },
+    development: {
+     host: "127.0.0.1",     // Localhost (default: none)
+     port: 7545,            // Standard Ethereum port (default: none)
+     network_id: "*",       // Any network (default: none)
+    },
     rinkeby: {
       // InfuraP1
       // provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/d11ebfb0fcd44dac8c671f139b7de6f1"),
       // InfuraP2
       // provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/1b69f3edcc6240d4959aedbb6ee49ed4"),
       // InfuraP3
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/ae09f677fc3245afbe3ef436217405cb"),
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/"+process.env.INFURA_API_KEY),
       network_id: 4,
     },
   }

@@ -1,4 +1,5 @@
 # Prepairing for the Deployment   
+
 1)Set the project for the deployment of the contracts on the Network\
 2)Deploy the contracts on the Network\
 3)Prepare the project for the Frontend\

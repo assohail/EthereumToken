@@ -1,12 +1,14 @@
 App = {
   web3Provider: null,
   contracts: {},
-  account: '0x0',
+  // account: '0x0',
+  account:'0x0000000000000000000000000000000000000000',
   loading: false,
   tokenPrice: 1000000000000000,
   tokensSold: 0,
   tokensAvailable: 750000,
 
+  
   init: function() {
     console.log("App initialized...")
     return App.initWeb3();
@@ -15,16 +17,68 @@ App = {
   initWeb3: function() {
     
     if(typeof web3 !== 'undefined') {
+      //check Metamask lock
+      App.IsMetamaskLocked();
       // If a web3 instance is already provided by Meta Mask.
       App.web3Provider = web3.currentProvider;
       web3  = new Web3(web3.currentProvider);
     } else {
-      // Specify default instance if no web3 instance provided
+      // Specify default instance for ganache, if no web3 instance provided
       App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
       web3 = new Web3(App.web3Provider);
     }
-    return App.initContracts()
+    return App.initContracts();
   },
+
+    IsMetamaskLocked: async function () {
+    // await window.ethereum.enable(); // No need to enable this if MetaMask there
+    // Other check for MetaMask after checking of web3 availability
+    if(window.ethereum.isMetaMask){
+      console.log('In metamask');
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      console.log('accounts');
+      console.log(accounts);
+      // If MetaMask is not locked
+      if (window.ethereum.selectedAddress){
+        console.log('Address:' + ethereum.selectedAddress);
+      } else {
+        console.log('Account is locked');
+      }
+    } else {
+      console.log('Pls install Meta Mask');
+    }
+    console.log('promise..................');
+    // const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    // for(i=0; i<accounts.length; i++){
+    //  console.log(accounts.length+" iter:"+ i+1);
+    //  console.log(accounts);
+    // }
+    
+    //const accounts = ethereum.eth_requestAccounts();
+    //const account = accounts[0];
+    //console.log('Ac:'+account);
+
+    // When user changes account, reload the App for the new account
+    window.ethereum.on('accountsChanged', function (accounts) {
+      App.render();
+    });
+
+    //accounts(function(err, accounts){
+    //  if (err != null) {
+    //    console.log(err)
+    //  }else if (accounts.length === 0) {
+    //    console.log('MetaMask is locked')
+    //  }else {
+    //    console.log('MetaMask is unlocked')}
+    //  });
+
+    // console.log('before unlocked');
+    // const isUnlocked = await window?.ethereum?._metamask.isUnlocked();
+    // console.log('unlocked');
+    // console.debug({ isUnlocked });
+
+  },
+
 
   initContracts: function() {
     $.getJSON("AMZTokenSale.json", function(amzTokenSale){
@@ -49,9 +103,10 @@ App = {
 
   buyTokens: function() {
     // console.log('AAAAA');
-    $('#content').hide();
-    $('.content').hide();
-    $('#loader').show();
+    
+    // $('#content').hide();// commented for loader issue
+    // $('.content').hide();
+    // $('#loader').show();
     var numberOfTokens = $('#numberOfTokens').val();
     console.log('No of Tokens: ' + numberOfTokens);
     App.contracts.AMZTokenSale.deployed().then(function(instance){
@@ -102,8 +157,12 @@ App = {
     // Load account data
     web3.eth.getCoinbase(function(err, account){
       if(err === null){
-        App.account = account;
-        $('#accountAddress').html("Your Account: " + account);
+        if (account){
+          App.account = account;
+          $('#accountAddress').html("Your Account: " + account);
+        } else {
+          $('#accountAddress').html("Account Not Selected: " + App.account);
+        }
       }
     });
 

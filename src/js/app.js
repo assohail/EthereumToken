@@ -18,7 +18,7 @@ App = {
     
     if(typeof web3 !== 'undefined') {
       //check Metamask lock
-      App.IsMetamaskLocked();
+      App.isMetamaskLocked();
       // If a web3 instance is already provided by Meta Mask.
       App.web3Provider = web3.currentProvider;
       web3  = new Web3(web3.currentProvider);
@@ -30,24 +30,41 @@ App = {
     return App.initContracts();
   },
 
-    IsMetamaskLocked: async function () {
+    isMetamaskLocked: async function () {
     // await window.ethereum.enable(); // No need to enable this if MetaMask there
     // Other check for MetaMask after checking of web3 availability
     if(window.ethereum.isMetaMask){
-      console.log('In metamask');
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      console.log('accounts');
-      console.log(accounts);
+      console.log('Meta Mask Detected!');
+      window.ethereum.request({ method: 'eth_requestAccounts' }).then(function(accounts){
+        if(accounts.length !== 0){
+          console.log('eth_Accounts:'+ accounts);
+          App.render();
+          console.log('Address added..')
+        }else {
+          console.log('Pls add Meta Mask account.');
+        }
+      }).then(function(err){
+        if(err){
+          console.log('err :'+ err);
+        }
+        
+      });
+      
       // If MetaMask is not locked
-      if (window.ethereum.selectedAddress){
-        console.log('Address:' + ethereum.selectedAddress);
-      } else {
-        console.log('Account is locked');
+      if(App.account === '0x0000000000000000000000000000000000000000'){
+        if (ethereum.selectedAddress){
+          console.log('Address:' + ethereum.selectedAddress);
+          App.account = ethereum.selectedAddress;
+          App.render();
+          console.log('Added address.');
+        } else {
+          console.log('Pls unlock your Meta Mask account.');
+        }
       }
+
     } else {
       console.log('Pls install Meta Mask');
     }
-    console.log('promise..................');
     // const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     // for(i=0; i<accounts.length; i++){
     //  console.log(accounts.length+" iter:"+ i+1);
@@ -58,6 +75,8 @@ App = {
     //const account = accounts[0];
     //console.log('Ac:'+account);
 
+
+    
     // When user changes account, reload the App for the new account
     window.ethereum.on('accountsChanged', function (accounts) {
       App.render();
@@ -76,6 +95,16 @@ App = {
     // const isUnlocked = await window?.ethereum?._metamask.isUnlocked();
     // console.log('unlocked');
     // console.debug({ isUnlocked });
+
+
+    ethereum.on("chainChanged", (_chainId) => {
+      window.location.reload();
+    });
+    
+    ethereum.request({ method: "eth_chainId" }).then((_chainId) => {
+    chainId = _chainId; 
+    console.log(`Chain ID: ${chainId}`);
+    });
 
   },
 
@@ -102,28 +131,32 @@ App = {
   },
 
   buyTokens: function() {
-    // console.log('AAAAA');
-    
     // $('#content').hide();// commented for loader issue
     // $('.content').hide();
     // $('#loader').show();
     var numberOfTokens = $('#numberOfTokens').val();
     console.log('No of Tokens: ' + numberOfTokens);
-    App.contracts.AMZTokenSale.deployed().then(function(instance){
-      console.log('AAAAA');
-      return instance.buyTokens(numberOfTokens, {
+
+    if (App.account != null && App.account !== '0x0000000000000000000000000000000000000000'){
+      App.contracts.AMZTokenSale.deployed().then(function(instance){
+        console.log('AAAAA');
+        return instance.buyTokens(numberOfTokens, {
         from: App.account,
         value: numberOfTokens * App.tokenPrice,
         gas: 500000
+        });
+      }).then(function(result){
+        console.log("Tokens bought...");
+        console.log(result);
+        $('form').trigger('reset'); // reset number of tokens in form
+        // $('#loader').hide();
+        // $('#content').show();
+        //Wait for Sell event
       });
-    }).then(function(result){
-      console.log("Tokens bought...");
-      console.log(result);
-      $('form').trigger('reset'); // reset number of tokens in form
-      // $('#loader').hide();
-      // $('#content').show();
-      //Wait for Sell event
-    });
+    } else {
+      window.location.reload();
+    }
+      
   },
 
   // Listens event emitted from the contract

@@ -28,7 +28,7 @@ contract AMZTokenSale {
         // Require that the contarct has enough tokens
         // require(tokenContract.balanceOf(address(this)) >= _numberOfTokens, 'Balance Error 1');
         // Require that a transfer is successful
-        // require(tokenContract.transfer(msg.sender, _numberOfTokens), 'Balance Error 2');
+        require(tokenContract.transfer(msg.sender, _numberOfTokens), 'Balance Error 2');
         // Keep track of tokenSold
         tokensSold += _numberOfTokens;
 

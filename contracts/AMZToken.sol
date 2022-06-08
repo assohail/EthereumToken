@@ -31,7 +31,7 @@ contract AMZToken {
     //Transfer
     function transfer(address _to, uint256 _value) public returns (bool success){
       //Exception if account does'nt have enough
-      require(balanceOf[msg.sender] >= _value);//Stop function if condition result false
+    //   require(balanceOf[msg.sender] >= _value);//Stop function if condition result false
       
       balanceOf[msg.sender] -= _value;
       balanceOf[_to] += _value;

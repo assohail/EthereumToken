@@ -31,7 +31,9 @@ module.exports = {
       // InfuraP2
       // provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/1b69f3edcc6240d4959aedbb6ee49ed4"),
       // InfuraP3
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/"+process.env.INFURA_API_KEY),
+      // provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/"+process.env.INFURA_API_KEY),
+      
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/cf002d4904b04189b18959d162636e28"),
       network_id: 4,
     },
   }

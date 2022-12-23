@@ -42,7 +42,7 @@ module.exports = {
       // timeoutBlocks: 200
     },
     goerli: {
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://goerli.infura.io/v3/1b69f3edcc6240d4959aedbb6ee49ed4"),
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://goerli.infura.io/v3/"+process.env.INFURA_API_KEY),
       network_id: 5,
     }
   }

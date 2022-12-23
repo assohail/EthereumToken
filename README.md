@@ -16,6 +16,7 @@
 - [ ] error of address payable(admin) in tokenSale.sol
 - [ ] work on failed test
 - [x] tokensSold issue
+- [x] cloud deployment
 - [ ] endSale functionality frontend 
 
 ## Project Setup

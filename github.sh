@@ -1,3 +1,3 @@
 git add .
-git commit -am "readme, github.sh"
+git commit -am "readme"
 git push origin dev

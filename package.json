@@ -23,8 +23,9 @@
   },
   "homepage": "https://github.com/assohail/EthereumToken#readme",
   "dependencies": {
+    "@truffle/hdwallet-provider": "^2.1.4",
     "dotenv": "^10.0.0",
     "lite-server": "^2.6.1",
-    "truffle-hdwallet-provider": "^1.0.17"
+    "solc": "^0.8.17"
   }
 }

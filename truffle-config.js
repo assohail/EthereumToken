@@ -1,4 +1,5 @@
-const HDWalletProvider = require('truffle-hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+// import HDWalletProvider from '@truffle/hdwallet-provider';
 
 require('dotenv').config(); // dotenv will start env specific var's from the env file to process.env
 // heroku git:remote -a amz-ico-token
@@ -8,7 +9,7 @@ module.exports = {
    * defaults web3 uses to send transactions. If you don't specify one truffle
    * will spin up a development blockchain for you on port 9545 when you
    * run `develop` or `test`. You can ask a truffle command to use a specific
-   * network from the command line, e.g
+   * network from the command line, e.g.
    *
    * $ truffle test --network <network-name>
    */
@@ -22,7 +23,7 @@ module.exports = {
     //
     development: {
      host: "127.0.0.1",     // Localhost (default: none)
-     port: 7545,            // Standard Ethereum port (default: none)
+     port: 8545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
     rinkeby: {
@@ -31,11 +32,18 @@ module.exports = {
       // InfuraP2
       // provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/1b69f3edcc6240d4959aedbb6ee49ed4"),
       // InfuraP3
-      // provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/"+process.env.INFURA_API_KEY),
-
-      //AMZ Balance Test
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/cf002d4904b04189b18959d162636e28"),
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/"+process.env.INFURA_API_KEY),
       network_id: 4,
     },
+    sepolia: {
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://sepolia.infura.io/v3/"+process.env.INFURA_API_KEY),
+      network_id: 11155111,
+      // networkCheckTimeout: 10000,
+      // timeoutBlocks: 200
+    },
+    goerli: {
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, "https://goerli.infura.io/v3/1b69f3edcc6240d4959aedbb6ee49ed4"),
+      network_id: 5,
+    }
   }
 };

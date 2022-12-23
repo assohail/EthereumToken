@@ -5,7 +5,7 @@ App = {
   account:'0x0000000000000000000000000000000000000000',
   loading: false,
   tokenPrice: 1000000000000000,
-  tokensSold: 0,
+  tokensSold: 250000,
   tokensAvailable: 750000,
 
   

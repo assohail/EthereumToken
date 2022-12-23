@@ -4,15 +4,15 @@ import "./AMZToken.sol";
 
 contract AMZTokenSale {
     //We dont want to expose address of admin to public
-    address payable public admin;
+    address public admin;
     AMZToken public tokenContract;
     uint256 public tokenPrice;
     uint256 public tokensSold;
 
     event Sell(address _buyer, uint256 _amount);
 
-    constructor (AMZToken _tokenContract, uint256 _tokenPrice) { 
-        admin = payable(msg.sender);
+    constructor (AMZToken _tokenContract, uint256 _tokenPrice) public { 
+        admin = msg.sender;
         tokenContract = _tokenContract;
         tokenPrice = _tokenPrice;
         tokensSold += tokenContract.balanceOf(admin);
@@ -44,8 +44,8 @@ contract AMZTokenSale {
         // require(
             tokenContract.transfer(admin, tokenContract.balanceOf(address(this)));
         // , "transfer error");
-        // admin.transfer(address(this).balance);
+        //  admin.transfer(address(this).balance);
         // Destroy contract
-        selfdestruct(payable(admin));
+        // selfdestruct(admin);
     }
 }

@@ -13,7 +13,7 @@
 - [] initialSupply strategy, decimals
 - [] shift tokenPrice to the token contract
 - [] move from node 14.17.6 to latest
-- [x] error of address payable(admin) in tokenSale.sol
+- [] error of address payable(admin) in tokenSale.sol
 - [] work on failed test
 - [x] tokensSold issue
 - [] endSale functionality frontend 

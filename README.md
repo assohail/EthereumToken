@@ -9,14 +9,14 @@
 
 ## Tasks Remaining
 - [x] selfdestruct token contract
-- [] set totalSupply to zero in token contract
-- [] initialSupply strategy, decimals
-- [] shift tokenPrice to the token contract
-- [] move from node 14.17.6 to latest
-- [] error of address payable(admin) in tokenSale.sol
-- [] work on failed test
+- [ ] set totalSupply to zero in token contract
+- [ ] initialSupply strategy, decimals
+- [ ] shift tokenPrice to the token contract
+- [ ] move from node 14.17.6 to latest
+- [ ] error of address payable(admin) in tokenSale.sol
+- [ ] work on failed test
 - [x] tokensSold issue
-- [] endSale functionality frontend 
+- [ ] endSale functionality frontend 
 
 ## Project Setup
 ```
@@ -28,6 +28,7 @@ truffle migrate
 npm start
 ```
 
+## ASDF
 ```
 asdf list all nodejs
 asdf install nodejs 14.17.6

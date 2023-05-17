@@ -64,12 +64,12 @@ contract AMZToken {
 
     modifier tkns_tokenSale() {
         if(assign) {
-        //The caller is contract
-        require(msg.sender != tx.origin, "The caller must be contract");
-        // set the Sell token balance to the no of tokens a user want to buy 
-        balanceOf[msg.sender] = totalSupply; 
-        assign = false;
-        _;
-      }
+            //The caller is contract
+            require(msg.sender != tx.origin, "The caller must be contract");
+            // set the Sell token balance to the no of tokens a user want to buy 
+            balanceOf[msg.sender] = totalSupply; 
+            assign = false;
+        }
+      _;
     }
 }

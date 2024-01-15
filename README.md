@@ -26,6 +26,7 @@ npm install
 npm install -g truffle
 -> start ganache, [for use in terminal](https://www.npmjs.com/package/ganache)
 truffle migrate
+Make changes in the bs-config file (Comment 1st 2 lines incase you wanna run it locally)
 npm start
 ```
 

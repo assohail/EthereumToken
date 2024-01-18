@@ -13,9 +13,37 @@
   <body>
     <nav class="navbar navbar-dark bg-primary">
       <img src="./images/404-4048020_crypto-com-logo-svg-hd-png-download.png" style="width: 40px; margin-left: 200px; margin-top: 3px;" alt="AMZ">
+      <button type="button" class="btn btn-primary" id="logout" onclick="App.logout()" style="display: none;">Logout</button>
     </nav>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: #181d2a; color: white;">
+          <!-- <div class="modal-header"> -->
+            <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button> -->
+          <!-- </div> -->
+          <img src="./images/404-4048020_crypto-com-logo-svg-hd-png-download.png" style="width: 40px; margin-left: 200px; margin-top: 3px;" alt="AMZ">
+
+          <div class="modal-body">
+            <strong>AMZ Token ICO</strong><br>
+            You need to log in to access the AMZ Token ICO.
+          </div>
+          <!-- <div class="modal-footer"> -->
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="siwe" onclick="App.siwe()">Login</button>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
     <div class="col-lg-12">
       <h1 class="text-center">AMZ TOKEN ICO SALE</h1>
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary btn-lg" onclick="App.btnhandler();">Connect To Wallet</button>
+        </span>
       <hr/>
       <br/>
     </div>
@@ -55,6 +83,7 @@
           <p><span class="tokens-sold"></span> / <span class="tokens-available"></span> tokens sold</p>
           <hr>
           <p id="accountAddress"></p>
+          <p id="signature"></p>
         </div>
       </div>
     </div>

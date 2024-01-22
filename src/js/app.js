@@ -129,7 +129,8 @@ App = {
 			})
 			.then((balance) => {
         console.log(balance)
-					App.account_balance = web3.fromWei(balance, 'ether')
+				App.account_balance = web3.fromWei(balance, 'ether')
+        $("#account_balance").html("Account Balance: " + App.account_balance)
         console.log(App.account_balance)
 			});
 	},

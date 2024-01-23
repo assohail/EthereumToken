@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.22 <0.9.0;
+pragma solidity >= 0.4.22 <0.9.0;
 import "./AMZToken.sol";
 
 contract AMZTokenSale {
     //We dont want to expose address of admin to public
-    address payable private admin;
+    address public admin;
     AMZToken public tokenContract;
     uint256 public tokenPrice;
     uint256 public tokensSold;
@@ -15,6 +15,7 @@ contract AMZTokenSale {
         admin = msg.sender;
         tokenContract = _tokenContract;
         tokenPrice = _tokenPrice;
+        tokensSold += tokenContract.balanceOf(admin);
     }
 
     // multiply
@@ -24,11 +25,11 @@ contract AMZTokenSale {
 
     function buyTokens(uint256 _numberOfTokens) public payable {
         // Require that the value is equal to tokens
-        require(msg.value == multiply(_numberOfTokens, tokenPrice), 'Value Error');
+        require(msg.value == multiply(_numberOfTokens, tokenPrice), "Value Error");
         // Require that the contarct has enough tokens
-        // require(tokenContract.balanceOf(address(this)) >= _numberOfTokens, 'Balance Error 1');
+        // require(tokenContract.balanceOf(address(this)) >= _numberOfTokens, "Balance Error 1");
         // Require that a transfer is successful
-        require(tokenContract.transfer(msg.sender, _numberOfTokens), 'Balance Error 2');
+        require(tokenContract.transfer(msg.sender, _numberOfTokens), "Balance Error 2");
         // Keep track of tokenSold
         tokensSold += _numberOfTokens;
 
@@ -38,10 +39,13 @@ contract AMZTokenSale {
     // End Token Sale
     function endSale() public {
         // Require admin
-        require(msg.sender == admin);
+        require(msg.sender == admin, "Only admin can end sale.");
         // Transfer remaining tokens to admin
-        require(tokenContract.transfer(admin, tokenContract.balanceOf(address(this))));
+        // require(
+            tokenContract.transfer(admin, tokenContract.balanceOf(address(this)));
+        // , "transfer error");
+        //  admin.transfer(address(this).balance);
         // Destroy contract
-        selfdestruct(admin);
+        // selfdestruct(admin);
     }
 }
